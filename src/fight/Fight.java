@@ -1,8 +1,9 @@
+package fight;
 public class Fight
 {
 	public static void main(String[] args)
 	{
-		Character person = Character.newPerson(Age.PRIME);
+		Character person = new Character(Age.PRIME);
 		System.out.println(person);
 	}
 }

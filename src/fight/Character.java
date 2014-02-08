@@ -1,18 +1,8 @@
+package fight;
 public class Character
 {
 	public static final int
 		STAT_RANGE = 20;
-	public static Character newPerson(Age age)
-	{
-		//TODO flesh this part out
-		Character newCharacter = new Character("John Doe");
-		
-		newCharacter.age = (int)(Math.random()*(age.OLDEST-age.YOUNGEST))+age.YOUNGEST;
-		newCharacter.strength = (int)(Math.random()*STAT_RANGE);
-		newCharacter.intelligence = (int)(Math.random()*STAT_RANGE);
-		newCharacter.agility = (int)(Math.random()*STAT_RANGE);
-		return newCharacter;
-	}
 	private final String[] NAME;
 	public int
 		strength,
@@ -21,9 +11,13 @@ public class Character
 		age;
 	public Weapon weapon;
 	
-	private Character(String name)
+	public Character(Age ageLevel)
 	{
-		NAME = name.split(" ");
+		NAME = "John Doe".split(" ");
+		age = ageLevel.giveAge();
+		strength = (int)(Math.random()*STAT_RANGE);
+		intelligence = (int)(Math.random()*STAT_RANGE);
+		agility = (int)(Math.random()*STAT_RANGE);
 	}
 	public String firstName()
 	{

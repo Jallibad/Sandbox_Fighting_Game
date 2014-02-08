@@ -1,3 +1,4 @@
+package fight;
 public enum Age
 {
 //	AGE			(YOUNG,	OLD,	STREN,	INT,	AGI),
@@ -23,5 +24,9 @@ public enum Age
 		STRENGTH_BONUS = strengthBonus;
 		INTELLIGENCE_BONUS = intelligenceBonus;
 		AGILITY_BONUS = agilityBonus;
+	}
+	public int giveAge()
+	{
+		return (int)(Math.random()*(OLDEST-YOUNGEST))+YOUNGEST;
 	}
 }
