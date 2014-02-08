@@ -3,7 +3,7 @@ public class Character
 {
 	public static final int
 		STAT_RANGE = 20;
-	private final String[] NAME;
+	public Name name;
 	public int
 		strength,
 		intelligence,
@@ -13,31 +13,20 @@ public class Character
 	
 	public Character(Age ageLevel)
 	{
-		NAME = "John Doe".split(" ");
+		name = new Name("John James Doe");
 		age = ageLevel.giveAge();
 		strength = (int)(Math.random()*STAT_RANGE);
 		intelligence = (int)(Math.random()*STAT_RANGE);
 		agility = (int)(Math.random()*STAT_RANGE);
 	}
-	public String firstName()
+	public int calcDamage()
 	{
-		return NAME[0];
-	}
-	public String lastName()
-	{
-		return NAME[NAME.length-1];
-	}
-	public String fullName()
-	{
-		String result = "";
-		for (String name: NAME)
-			result += name + " ";
-		return result;
+		return weapon.giveDamage();
 	}
 	public String toString()
 	{
 		return
-			fullName()+"\n"
+			name.fullName()+"\n"
 			+ "age: "+age+"\n"
 			+ "strength: "+strength+"\n"
 			+ "intelligence: "+intelligence+"\n"

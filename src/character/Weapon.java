@@ -1,23 +1,31 @@
 package character;
-public class Weapon
+class Weapon
 {
 	public final String NAME;
-	public final int
-		DAMAGE;
-	public Weapon(String name, int damage)
+	private final int
+		LOW_DAMAGE,
+		HIGH_DAMAGE;
+	Weapon(String name, int lowDamage, int highDamage)
 	{
 		NAME = name;
-		DAMAGE = damage;
+		LOW_DAMAGE = lowDamage;
+		HIGH_DAMAGE = highDamage;
 	}
-	public Weapon()
+	Weapon()
 	{
 		NAME = "DefaultGun";
-		DAMAGE = 10;
+		LOW_DAMAGE = 10;
+		HIGH_DAMAGE = 20;
+	}
+	int giveDamage()
+	{
+		return (int)(Math.random()*(HIGH_DAMAGE-LOW_DAMAGE))+LOW_DAMAGE;
 	}
 	public String toString()
 	{
 		return
 			"name: "+NAME+"\n"
-			+ "damage: "+DAMAGE;
+			+ "low damage: "+LOW_DAMAGE+"\n"
+			+ "high damage: "+HIGH_DAMAGE;
 	}
 }
