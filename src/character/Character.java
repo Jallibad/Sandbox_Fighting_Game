@@ -1,4 +1,5 @@
 package character;
+
 public class Character
 {
 	public static final int
@@ -10,6 +11,8 @@ public class Character
 		agility,
 		age;
 	public Weapon weapon = new Weapon();
+	@SuppressWarnings("unused")
+	private BodyPart[] bodyParts; //TODO implement body parts and add effects 
 	
 	public Character(Age ageLevel)
 	{
@@ -21,6 +24,7 @@ public class Character
 	}
 	public int calcDamage()
 	{
+		//TODO calculate damage with skill
 		return weapon.giveDamage();
 	}
 	public String toString()

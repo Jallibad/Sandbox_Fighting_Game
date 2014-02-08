@@ -9,6 +9,5 @@ public class Fight
 	{
 		Character person = new Character(Age.PRIME);
 		System.out.println(person);
-		System.out.println(person.name.withAbrev());
 	}
 }

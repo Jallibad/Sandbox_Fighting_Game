@@ -1,5 +1,5 @@
 package character;
-class Weapon
+public class Weapon
 {
 	public Name name;
 	private final int
