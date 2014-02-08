@@ -1,4 +1,4 @@
-package fight;
+package character;
 public class Character
 {
 	public static final int
@@ -9,7 +9,7 @@ public class Character
 		intelligence,
 		agility,
 		age;
-	public Weapon weapon;
+	public Weapon weapon = new Weapon();
 	
 	public Character(Age ageLevel)
 	{
@@ -41,6 +41,7 @@ public class Character
 			+ "age: "+age+"\n"
 			+ "strength: "+strength+"\n"
 			+ "intelligence: "+intelligence+"\n"
-			+ "agility: "+agility+"\n";
+			+ "agility: "+agility+"\n"
+			+ "\nweapon:\n"+weapon;
 	}
 }

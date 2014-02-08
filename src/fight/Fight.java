@@ -1,4 +1,8 @@
 package fight;
+
+import character.Age;
+import character.Character;
+
 public class Fight
 {
 	public static void main(String[] args)

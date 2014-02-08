@@ -1,4 +1,4 @@
-package fight;
+package character;
 public enum Age
 {
 //	AGE			(YOUNG,	OLD,	STREN,	INT,	AGI),
