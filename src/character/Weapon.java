@@ -1,19 +1,19 @@
 package character;
 class Weapon
 {
-	public final String NAME;
+	public Name name;
 	private final int
 		LOW_DAMAGE,
 		HIGH_DAMAGE;
-	Weapon(String name, int lowDamage, int highDamage)
+	Weapon(String _name, int lowDamage, int highDamage)
 	{
-		NAME = name;
+		name = new Name(_name);
 		LOW_DAMAGE = lowDamage;
 		HIGH_DAMAGE = highDamage;
 	}
 	Weapon()
 	{
-		NAME = "DefaultGun";
+		name = new Name("Default Gun");
 		LOW_DAMAGE = 10;
 		HIGH_DAMAGE = 20;
 	}
@@ -24,7 +24,7 @@ class Weapon
 	public String toString()
 	{
 		return
-			"name: "+NAME+"\n"
+			name.fullName()+"\n"
 			+ "low damage: "+LOW_DAMAGE+"\n"
 			+ "high damage: "+HIGH_DAMAGE;
 	}

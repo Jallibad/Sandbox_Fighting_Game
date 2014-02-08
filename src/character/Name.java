@@ -12,8 +12,7 @@ public class Name
 		String result = NAME[0]+" ";
 		for (int i=1; i<NAME.length-1; i++)
 			result += NAME[i].charAt(0)+". ";
-		result += NAME[NAME.length-1];
-		return result;
+		return result+NAME[NAME.length-1];
 	}
 	public String fullName()
 	{
