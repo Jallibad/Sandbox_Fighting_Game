@@ -11,11 +11,11 @@ public class Character
 		agility,
 		age;
 	public Weapon weapon = new Weapon();
-	@SuppressWarnings("unused")
 	private BodyPart[] bodyParts; //TODO implement body parts and add effects 
 	
-	public Character(Age ageLevel)
+	public Character(Age ageLevel, BodyPart[] _bodyParts)
 	{
+		bodyParts = _bodyParts;
 		name = new Name("John James Doe");
 		age = ageLevel.giveAge();
 		strength = (int)(Math.random()*STAT_RANGE);
@@ -24,17 +24,22 @@ public class Character
 	}
 	public int calcDamage()
 	{
-		//TODO calculate damage with skill
+		//TODO calculate damage with skills
 		return weapon.giveDamage();
 	}
 	public String toString()
 	{
+		String partsText = "";
+		for (BodyPart bodyPart: bodyParts)
+			partsText += "\n" + bodyPart;
+		partsText = partsText.substring(1);
 		return
 			name.fullName()+"\n"
 			+ "age: "+age+"\n"
 			+ "strength: "+strength+"\n"
 			+ "intelligence: "+intelligence+"\n"
 			+ "agility: "+agility+"\n"
-			+ "\nweapon:\n"+weapon;
+			+ "\nweapon:\n"+weapon+"\n"
+			+ "\nbodyparts:\n"+partsText;
 	}
 }

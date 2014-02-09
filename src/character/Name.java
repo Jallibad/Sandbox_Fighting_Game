@@ -16,9 +16,8 @@ public class Name
 	}
 	public String shortened() //Gives the name without any vowels
 	{
-		final String[] vowels = {"a", "e", "i", "o", "u"};
 		String result = fullName();
-		for (String vowel: vowels)
+		for (String vowel: new String[] {"a", "e", "i", "o", "u"})
 			result = result.replace(vowel, "");
 		return result;
 	}
@@ -26,7 +25,7 @@ public class Name
 	{
 		String result = "";
 		for (String name: NAME)
-			result += name + " ";
-		return result.substring(0, result.length()-1);
+			result += " " + name;
+		return result.substring(1);
 	}
 }
