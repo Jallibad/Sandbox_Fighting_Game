@@ -1,24 +1,29 @@
 package character;
+
 public enum Health
 {
-//	HEALTH		(RATE,	FUNC,	RECOV),
-	HEALTHY		(0,		true,	null),
-	LOW_DAMAGE	(1,		true,	HEALTHY),
-	HIGH_DAMAGE	(5,		false,	LOW_DAMAGE),
-	CLEAN_SEVER	(2,		false,	null),
-	ROUGH_SEVER	(10,	false,	CLEAN_SEVER);
+//	HEALTH			(RATE,	FUNC,	INFECT,	RECOV,			HEALTH),
+	HEALTHY			(0,		100,	0,		null,			0),
+	LOW_DAMAGE		(1,		90,		5,		HEALTHY,		10),
+	HIGH_DAMAGE		(2,		10,		20,		LOW_DAMAGE,		15),
+	SEVERE_DAMAGE	(3,		0,		90,		HIGH_DAMAGE,	20),
+	CLEAN_SEVER		(2,		0,		0,		null,			0),
+	ROUGH_SEVER		(4,		0,		90,		CLEAN_SEVER,	25);
 	
 	public final int
-		RATING;
-	public final boolean
-		FUNCTIONAL;
+		RATING, //Rating of the injury 
+		FUNCTIONAL, //Percent of the functionality of the organ
+		INFECTION_CHANCE, //Percent chance of the organ becoming infected
+		HEALTH; //Damage necessary to cause injury
 	public final Health
-		RECOVER_TO;
-	Health(int rating, boolean functional, Health recoverTo)
+		RECOVER_TO; //What the injury will turn to if it heals
+	private Health(int rating, int functional, int infectionChance, Health recoverTo, int health)
 	{
 		RATING = rating;
 		FUNCTIONAL = functional;
+		INFECTION_CHANCE = infectionChance;
 		RECOVER_TO = recoverTo;
+		HEALTH = health;
 	}
 	boolean healthierThan(Health health)
 	{

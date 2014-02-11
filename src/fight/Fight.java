@@ -1,20 +1,38 @@
 package fight;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
+
 import character.Age;
-import character.BodyPart;
 import character.Character;
+import character.Creature;
 
 public class Fight
 {
-	public static void main(String[] args)
+	public List<Character> allies = new ArrayList<Character>();
+	public List<Character> enemies = new ArrayList<Character>();
+	public Queue<String> combatLog = new PriorityQueue<String>();
+	
+	public Fight()
 	{
-		Character person = new Character(Age.PRIME, new BodyPart[]
-		{
-			BodyPart.ARM,
-			BodyPart.ARM,
-			BodyPart.LEG,
-			BodyPart.LEG
-		});
-		System.out.println(person);
+		allies.add(new Character(Age.PRIME, Creature.HUMAN));
+		enemies.add(new Character(Age.PRIME, Creature.HUMAN));
+	}
+	public void doRound()
+	{
+		for (int i=0; i<allies.size(); i++)
+			attack(allies.get(i), enemies.get((int)(Math.random()*enemies.size())));
+	}
+	private void attack(Character attacker, Character defender)
+	{
+		combatLog.add
+		(
+			attacker.name.withAbbrev() + " swings " + attacker.weapon
+			+ " at " + defender.name.withAbbrev() + "\n"
+			+ attacker.name.withAbbrev() + " hits " + defender.name.withAbbrev() + "'s "
+			+ defender.damage(attacker.calcDamage())
+		);
 	}
 }
