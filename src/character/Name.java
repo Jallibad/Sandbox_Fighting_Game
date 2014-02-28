@@ -30,11 +30,9 @@ public class Name
 		}
 		catch (IOException e)
 		{
-			System.out.println("no file");
 			NAME = new String[]{"PhuckYou"};
 			return;
 		}
-		System.out.println(name);
 		NAME = name.split(" ");
 	}
 	public String withAbbrev() //Gives the name abbreviating any middle names

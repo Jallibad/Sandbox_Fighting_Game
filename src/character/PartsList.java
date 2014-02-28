@@ -24,11 +24,31 @@ class PartsList
 	}
 	public Health calcHealth()
 	{
-		Health worstHealth = Health.HEALTHY;
+		int rating = 0;
 		for (Health partHealth: health)
-			if (!partHealth.healthierThan(worstHealth))
-				worstHealth = partHealth;
-		return worstHealth;
+			rating += partHealth.RATING;
+		rating /= health.length;
+		Health result;
+		switch (rating)
+		{
+			case 0:
+				result = Health.HEALTHY;
+				break;
+			case 1:
+				result = Health.LOW_DAMAGE;
+				break;
+			case 2:
+				result = Health.HIGH_DAMAGE;
+				break;
+			case 3:
+				result = Health.SEVERE_DAMAGE;
+				break;
+			case 4:
+			default:
+				result = null;
+				break;
+		}
+		return result;
 	}
 	public String damagePart(Health damage)
 	{

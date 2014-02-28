@@ -16,8 +16,8 @@ public class Weapon
 	Weapon()
 	{
 		name = new Name("Default Gun");
-		LOW_DAMAGE = 10;
-		HIGH_DAMAGE = 20;
+		LOW_DAMAGE = 100;
+		HIGH_DAMAGE = 200;
 		RANGED = false;
 	}
 	int giveDamage()

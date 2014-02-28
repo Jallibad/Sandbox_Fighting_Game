@@ -1,29 +1,35 @@
 package fight;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
 import character.Age;
 import character.Character;
 import character.Creature;
+import character.Team;
 
 public class Fight
 {
-	public List<Character> allies = new ArrayList<Character>();
-	public List<Character> enemies = new ArrayList<Character>();
 	public Queue<String> combatLog = new PriorityQueue<String>();
+	public Team allies = new Team();
+	public Team enemies = new Team();
 	
 	public Fight()
 	{
-		allies.add(new Character(Age.PRIME, Creature.HUMAN));
-		enemies.add(new Character(Age.PRIME, Creature.HUMAN));
+		for (int i=0; i<6; i++)
+			allies.addMember(new Character(Age.PRIME, Creature.HUMAN));
+		for (int i=0; i<6; i++)
+			enemies.addMember(new Character(Age.PRIME, Creature.HUMAN));
 	}
 	public void doRound()
 	{
-		for (int i=0; i<allies.size(); i++)
-			attack(allies.get(i), enemies.get((int)(Math.random()*enemies.size())));
+		sideFight(allies, enemies);
+		sideFight(enemies, allies);
+	}
+	private void sideFight(Team attack, Team defend)
+	{
+		for (Character attacker: attack.team)
+			attack(attacker, defend.getRandom());
 	}
 	private void attack(Character attacker, Character defender)
 	{

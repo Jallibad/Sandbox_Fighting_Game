@@ -3,9 +3,7 @@ package character;
 public class Character
 {
 	public static final int
-		STAT_RANGE = 20,
-		NAMES_RANGE_LOW = 2,
-		NAMES_RANGE_HIGH = 3;
+		STAT_RANGE = 20;
 	public Name name;
 	public Weapon weapon = new Weapon();
 	public int
@@ -13,6 +11,7 @@ public class Character
 		intelligence,
 		agility,
 		age;
+	public Health health = Health.HEALTHY;
 	private PartsList bodyParts; //TODO implement body parts and add effects 
 	
 	public Character(Age ageLevel, Creature creature)
