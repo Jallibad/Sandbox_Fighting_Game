@@ -24,6 +24,7 @@ public class FightingGame extends JFrame
 			System.out.println("shit's going down now");
 			System.exit(1);
 		}
+		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pane = frame.getContentPane();
 		pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
@@ -33,10 +34,16 @@ public class FightingGame extends JFrame
 		frame.pack();
 		frame.setVisible(true);
 	}
+	public FightingGame()
+	{
+		super();
+	}
 	public static void displayFight()
 	{
 		display = new FightDisplay();
 		pane.add(display);
+		display.setFocusable(true);
+		display.requestFocusInWindow();
 		display.setVisible(true);
 	}
 	public static void removeFight()

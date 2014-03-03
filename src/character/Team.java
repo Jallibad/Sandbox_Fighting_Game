@@ -5,7 +5,6 @@ import java.util.List;
 
 public class Team
 {
-	
 	public List<Character> team = new ArrayList<Character>();
 	
 	public Team()
@@ -18,7 +17,14 @@ public class Team
 	}
 	public Character getRandom()
 	{
-		return team.get((int)(Math.random()*team.size()));
+		List<Character> liveCharacters = new ArrayList<Character>(team);
+		for (int i=0; i<liveCharacters.size(); i++)
+			if (!liveCharacters.get(i).isAlive())
+				liveCharacters.remove(liveCharacters.get(i));
+		if (liveCharacters.size() == 0)
+			return null;
+		else
+			return liveCharacters.get((int)(Math.random()*liveCharacters.size()));
 	}
 	public String[] getHealth()
 	{
@@ -33,5 +39,12 @@ public class Team
 		for (int i=0; i<team.size(); i++)
 			results[i] = team.get(i).name.toString();
 		return results;
+	}
+	public boolean isAlive()
+	{
+		for (Character character: team)
+			if (character.calcHealth() != Health.DEAD)
+				return true;
+		return false;
 	}
 }

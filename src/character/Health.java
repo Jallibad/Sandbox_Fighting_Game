@@ -8,7 +8,8 @@ public enum Health
 	HIGH_DAMAGE		(2,		10,		20,		LOW_DAMAGE,		15),
 	SEVERE_DAMAGE	(3,		0,		90,		HIGH_DAMAGE,	20),
 	CLEAN_SEVER		(2,		0,		0,		null,			0),
-	ROUGH_SEVER		(4,		0,		90,		CLEAN_SEVER,	25);
+	ROUGH_SEVER		(4,		0,		90,		CLEAN_SEVER,	25),
+	DEAD			(-1,	0,		0,		null,			0);
 	
 	public final int
 		RATING, //Rating of the injury 

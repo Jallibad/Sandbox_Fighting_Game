@@ -1,46 +1,60 @@
 package display;
 
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
+import java.awt.Color;
 
-import javax.swing.JPanel;
+import javax.swing.JTextPane;
 
 import character.Team;
 
 @SuppressWarnings("serial")
-public class StatsDisplay extends JPanel
+public class StatsDisplay extends JTextPane
 {
-	public static final int
-		WIDTH = 350,
-		HEIGHT = 100;
 	public final String name;
-	private static final int
-		TEXT_DROP = 20;
 	private final Team team;
 	StatsDisplay(Team _team, String _name)
 	{
+		setBackground(Color.GRAY);
+		setContentType("text/html");
 		team = _team;
 		name = _name;
-		setPreferredSize(new Dimension(WIDTH, HEIGHT));
+		setEditable(false);
+		resetText();
 		repaint();
 	}
-	public void paint(Graphics page)
+	public void resetText()
 	{
-		Font defaultFont = page.getFont();
-		page.setFont(page.getFont().deriveFont(18.0f));
-		page.drawString(name, (WIDTH-page.getFontMetrics().stringWidth(name))/2, TEXT_DROP);
-		page.setFont(defaultFont);
-		drawLines(page, team.getNames(), WIDTH/3);
-		drawLines(page, team.getHealth(), WIDTH/3*2);
-	}
-	private void drawLines(Graphics page, String[] lines, int x)
-	{
-		FontMetrics fontMetric = page.getFontMetrics();
-		int y = fontMetric.stringWidth(name);
-		
-		for (String line: lines)
-			page.drawString(line, x-fontMetric.stringWidth(line)/2, y += fontMetric.getHeight());
+		String result = "<html><center><b>"+name+"</b></center><table>";
+		String[][] parts =
+		{
+			team.getNames(),
+			team.getHealth()
+		};
+		for (int y=0; y<parts[0].length; y++)
+		{
+			result += "<tr>";
+			final String color;
+			switch (parts[1][y])
+			{
+				case ("DEAD"):
+					color = "#7F7F7F"; //Background-Grey
+					break;
+				case ("SEVERE_DAMAGE"):
+					color = "#7F0000"; //Dark-Red
+					break;
+				case ("HIGH_DAMAGE"):
+					color = "#FF0000"; //Bright-Red
+					break;
+				case ("LOW_DAMAGE"):
+					color = "#7F3F3F"; //Purple-Grey
+					break;
+				case ("HEALTHY"):
+				default:
+					color = "#007F00";
+			}
+			for (int x=0; x<parts.length; x++)
+				result += "<td align=\"center\" width=150 bgcolor=\""+color+"\">"+parts[x][y]+"</td>";
+			result += "</tr>";
+		}
+		setText(result);
 	}
 }

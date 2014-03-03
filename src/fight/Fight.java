@@ -29,10 +29,13 @@ public class Fight
 	private void sideFight(Team attack, Team defend)
 	{
 		for (Character attacker: attack.team)
-			attack(attacker, defend.getRandom());
+			if (attacker.isAlive())
+				attack(attacker, defend.getRandom());
 	}
 	private void attack(Character attacker, Character defender)
 	{
+		if (defender == null)
+			return;
 		combatLog.add
 		(
 			attacker.name.withAbbrev() + " swings " + attacker.weapon

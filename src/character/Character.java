@@ -12,12 +12,24 @@ public class Character
 		agility,
 		age;
 	public Health health = Health.HEALTHY;
-	private PartsList bodyParts; //TODO implement body parts and add effects 
+	private BodyPart[] bodyParts;
+	private Health[] partHealths;
+	private int
+		maxHealth,
+		currHealth;
+	private boolean alive = true;
 	
 	public Character(Age ageLevel, Creature creature)
 	{
 		//Setting up the list of body parts
-		bodyParts = new PartsList(creature.bodyParts);
+		partHealths = new Health[creature.body.length];
+		bodyParts = creature.body;
+		for (int i=0; i<bodyParts.length; i++)
+		{
+			maxHealth += bodyParts[i].DAMAGE;
+			partHealths[i] = Health.HEALTHY;
+		}
+		currHealth = maxHealth;
 		
 		//Setting up miscellaneous info
 		name = new Name(creature.nameRange());
@@ -39,17 +51,39 @@ public class Character
 	}
 	public Health calcHealth()
 	{
-		return bodyParts.calcHealth();
+		int rating = (int)(((float)currHealth)/maxHealth*4);
+		Health result;
+		switch (rating)
+		{
+			case 1:
+				result = Health.SEVERE_DAMAGE;
+				break;
+			case 2:
+				result = Health.HIGH_DAMAGE;
+				break;
+			case 3:
+				result = Health.LOW_DAMAGE;
+				break;
+			case 4:
+				result = Health.HEALTHY;
+				break;
+			default:
+				result = Health.DEAD;
+				alive = false;
+				break;
+		}
+		return result;
 	}
 	public String damage(int damage)
 	{
-		String log = "";
-		Health value = Health.HEALTHY;
+		currHealth -= damage;
 		Health[] values = Health.values();
+		Health value = Health.HEALTHY;
 		while (value.HEALTH > damage || value.HEALTH == 0)
-			value = values[(int) (Math.random() * values.length)];
-		log += bodyParts.damagePart(value);
-		return log;
+			value = values[(int)(Math.random()*values.length)];
+		int partIndex = (int)(Math.random()*bodyParts.length);
+		partHealths[partIndex] = value;
+		return bodyParts[partIndex].NAME;
 	}
 	public String toString()
 	{
@@ -63,7 +97,10 @@ public class Character
 			+ "strength: "+strength+"\n"
 			+ "intelligence: "+intelligence+"\n"
 			+ "agility: "+agility+"\n"
-			+ "\nweapon:\n"+weapon+"\n"
-			+ "\nbodyparts:\n"+bodyParts;
+			+ "\nweapon:\n"+weapon+"\n";
+	}
+	public boolean isAlive()
+	{
+		return alive;
 	}
 }

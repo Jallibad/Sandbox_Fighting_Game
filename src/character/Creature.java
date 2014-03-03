@@ -36,20 +36,20 @@ public enum Creature
 		1
 	);
 	
-	final BodyPart[] bodyParts;
+	final BodyPart[] body;
 	final int
 		NAME_RANGE_LOW,
 		NAME_RANGE_HIGH;
-	Creature(BodyPart[] _bodyParts, int nameLow, int nameHigh)
+	Creature(BodyPart[] _body, int nameLow, int nameHigh)
 	{
-		bodyParts = _bodyParts;
+		body = _body;
 		NAME_RANGE_LOW = nameLow;
 		NAME_RANGE_HIGH = nameHigh;
 	}
 	public String toString()
 	{
 		String result = name()+":";
-		for (BodyPart bodyPart: bodyParts)
+		for (BodyPart bodyPart: body)
 			result += "\n"+bodyPart;
 		return result;
 	}
