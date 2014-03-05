@@ -32,7 +32,8 @@ public class FightingGame extends JFrame
 		
 		frame.pack();
 		frame.setVisible(true);
-		displayRaid();
+		//displayRaid();
+		displayFight();
 	}
 	public FightingGame()
 	{
@@ -45,10 +46,11 @@ public class FightingGame extends JFrame
 		fightDisplay.setFocusable(true);
 		fightDisplay.requestFocusInWindow();
 		fightDisplay.setVisible(true);
+		frame.pack();
 	}
 	public static void displayRaid()
 	{
-		mapDisplay = new MapDisplay(frame.getGraphics());
+		mapDisplay = new MapDisplay();
 		pane.add(mapDisplay);
 		mapDisplay.setFocusable(true);
 		mapDisplay.requestFocusInWindow();

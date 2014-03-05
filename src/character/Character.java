@@ -1,5 +1,7 @@
 package character;
 
+import words.Name;
+
 public class Character
 {
 	public static final int

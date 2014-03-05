@@ -1,4 +1,4 @@
-package character;
+package words;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -75,7 +75,7 @@ public class Name
 		catch (IOException e)
 		{
 			System.out.println(e.getMessage());
-			System.out.println("error reading file, defaulting to PhuckYou");
+			System.out.println("error reading file, defaulting to \"PhuckYou\"");
 		}
 		return lines;
 	}

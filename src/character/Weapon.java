@@ -1,4 +1,7 @@
 package character;
+
+import words.Name;
+
 public class Weapon
 {
 	public Name name;
