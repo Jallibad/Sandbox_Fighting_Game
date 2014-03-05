@@ -15,7 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 
-import fight.Fight;
+import raid.Fight;
 
 @SuppressWarnings("serial")
 public class FightDisplay extends JPanel implements ActionListener, KeyListener

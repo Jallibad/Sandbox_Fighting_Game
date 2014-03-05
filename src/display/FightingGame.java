@@ -10,7 +10,8 @@ import javax.swing.UIManager;
 public class FightingGame extends JFrame
 {
 	private static JFrame frame = new JFrame("FrameDemo");
-	private static FightDisplay display;
+	private static FightDisplay fightDisplay;
+	private static MapDisplay mapDisplay;
 	public static Container pane;
 	
 	public static void main(String[] args)
@@ -29,10 +30,9 @@ public class FightingGame extends JFrame
 		pane = frame.getContentPane();
 		pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
 		
-		displayFight();
-		
 		frame.pack();
 		frame.setVisible(true);
+		displayRaid();
 	}
 	public FightingGame()
 	{
@@ -40,22 +40,26 @@ public class FightingGame extends JFrame
 	}
 	public static void displayFight()
 	{
-		display = new FightDisplay();
-		pane.add(display);
-		display.setFocusable(true);
-		display.requestFocusInWindow();
-		display.setVisible(true);
+		fightDisplay = new FightDisplay();
+		pane.add(fightDisplay);
+		fightDisplay.setFocusable(true);
+		fightDisplay.requestFocusInWindow();
+		fightDisplay.setVisible(true);
+	}
+	public static void displayRaid()
+	{
+		mapDisplay = new MapDisplay(frame.getGraphics());
+		pane.add(mapDisplay);
+		mapDisplay.setFocusable(true);
+		mapDisplay.requestFocusInWindow();
+		frame.pack();
 	}
 	public static void removeFight()
 	{
-		if (display != null)
+		if (fightDisplay != null)
 		{
-			pane.remove(display);
-			display = null;
+			pane.remove(fightDisplay);
+			fightDisplay = null;
 		}
-	}
-	public static void pause()
-	{
-		
 	}
 }
