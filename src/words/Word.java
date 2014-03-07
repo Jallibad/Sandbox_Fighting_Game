@@ -6,15 +6,15 @@ import java.io.IOException;
 
 public enum Word
 {
-	ATTACK_VERB("attack_verbs", "hammer tosses"),
-	HIT_VERB	("hit_verbs", "licks");
+	ATTACK_VERB	("hammer tosses"),
+	HIT_VERB	("licks");
 	
+	private static final String
+		EXTENSION = ".word";
 	private final String
-		FILE_NAME,
 		DEFAULT;
-	private Word(String file, String normal)
+	private Word(String normal)
 	{
-		FILE_NAME = file+".word";
 		DEFAULT = normal;
 	}
 	public String getWord()
@@ -22,8 +22,8 @@ public enum Word
 		String result = "";
 		try
 		{
-			BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME));
-			int line = (int)(Math.random()*count(FILE_NAME));
+			BufferedReader reader = new BufferedReader(new FileReader(name()+EXTENSION));
+			int line = (int)(Math.random()*count(name()+EXTENSION));
 			for (int n=0; n<line; n++)
 				reader.readLine();
 			result = reader.readLine();

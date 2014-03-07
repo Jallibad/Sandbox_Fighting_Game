@@ -12,11 +12,11 @@ public enum Age
 	OLD			(60,	80,		+0,		+15,	-10);
 	
 	public final int
-		YOUNGEST,
-		OLDEST,
-		STRENGTH_BONUS,
-		INTELLIGENCE_BONUS,
-		AGILITY_BONUS;
+		YOUNGEST, //The youngest something can be in its age-group
+		OLDEST, //The oldest something can be in its age-group
+		STRENGTH_BONUS, //bonus to strength -- TODO not implemented
+		INTELLIGENCE_BONUS, //bonus to intelligence -- TODO not implemented
+		AGILITY_BONUS; //bonus to agility -- TODO not implemented
 	Age(int youngest, int oldest, int strengthBonus, int intelligenceBonus, int agilityBonus)
 	{
 		YOUNGEST = youngest;

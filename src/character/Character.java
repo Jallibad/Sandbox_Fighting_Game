@@ -87,6 +87,7 @@ public class Character
 		partHealths[partIndex] = value;
 		return bodyParts[partIndex].NAME;
 	}
+	@Override
 	public String toString()
 	{
 		return name.toString();

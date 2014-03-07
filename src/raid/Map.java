@@ -7,45 +7,58 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
+@SuppressWarnings("unused")
 public class Map
 {
 	private static final String
-		EXTENSION = ".map";
-	public static final int
-		TILES_WIDE = 5,
-		TILES_HIGH = 3;
+		EXTENSION = ".map"; //The file extension of a map ex:"example.txt"
 	private final String
 		FILE_NAME;
 	private int
-		x,
-		y;
+		playerX,
+		playerY,
+		cameraX,
+		cameraY;
 	public final MapTile[][] TILES;
 	
 	public Map(String fileName)
 	{
 		FILE_NAME = fileName;
-		x = 0;
-		y = 0;
-		MapTile[][] result;
+		playerX = 0;
+		playerY = 0;
+		MapTile[][] result = {{MapTile.CEMENT,MapTile.CEMENT},{MapTile.CEMENT}};
+		/*
 		try
 		{
 			ArrayList<ArrayList<MapTile>> arrayResult = new ArrayList<ArrayList<MapTile>>();
+			ArrayList<MapTile> arrayX = new ArrayList<MapTile>();
 			Scanner reader = new Scanner(new FileReader(FILE_NAME+EXTENSION));
 			
 			reader.useDelimiter("\\s");
 			@SuppressWarnings("unused")
-			int currX;
-			@SuppressWarnings("unused")
-			int currY;
+			int
+				currX = 0,
+				currY = 0;
 			while (reader.hasNext())
 			{
-				@SuppressWarnings("unused")
 				String token = reader.next();
 				//TODO Read map from file and store
+				if (token.equals(""))
+				{
+					arrayResult.add(currY++, arrayX);
+					arrayX = new ArrayList<MapTile>();
+				}
+				else
+				{
+					arrayX.add(MapTile.valueOf(token));
+				}
 			}
 			reader.close();
-			//arrayResult.get(0).size() put this in the slot with 0 once something has been added
-			result = new MapTile[arrayResult.size()][0];
+			//TODO arrayResult.get(0).size() put this in the slot with 0 once something has been added
+			result = new MapTile[arrayResult.size()][arrayResult.get(0).size()];
+			for (int y=0; y<arrayResult.size(); y++)
+				for (int x=0; x<arrayResult.get(y).size(); x++)
+					System.out.println(x+"\t"+y);
 		}
 		catch (IOException e)
 		{
@@ -53,20 +66,48 @@ public class Map
 			JOptionPane.showMessageDialog(null, FILE_NAME+EXTENSION+" could not be found");
 			result = new MapTile[0][0];
 		}
+		*/
 		TILES = result;
 	}
+	/**
+	 * Moves the player the requested x/y delta
+	 * @param xDelta - the x delta to move the player by
+	 * @param yDelta - the y delta to move the player by
+	 */
 	public void move(int xDelta, int yDelta)
 	{
-		if (passable(x+xDelta, y+yDelta))
+		int
+			propX = playerX+xDelta,
+			propY = playerY+yDelta;
+		if (passable(propX, propY))
 		{
-			x += xDelta;
-			y += yDelta;
+			playerX = propX;
+			playerY = propY;
 		}
-		System.out.println(x+"\t"+y);
 	}
+	/**
+	 * Re-centers the camera on the player
+	 */
+	public void recenterCamera()
+	{
+		//TODO Re-center camera code
+	}
+	/**
+	 * Checks if the given tile is passable
+	 * @param x - the x of the tile to search on
+	 * @param y - the y of the tile to search on
+	 * @return A boolean 'true' if the tile is passable to the player, a false otherwise
+	 */
 	private boolean passable(int x, int y)
 	{
-		//TODO Collision checking
-		return true;
+		//TODO fix the fuck out of this
+		try
+		{
+			return TILES[x][y].PASSABLE;
+		}
+		catch (ArrayIndexOutOfBoundsException e)
+		{
+			return false;
+		}
 	}
 }

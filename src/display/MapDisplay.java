@@ -1,5 +1,6 @@
 package display;
 
+import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -16,11 +17,15 @@ import raid.MapTile;
 public class MapDisplay extends JPanel implements KeyListener
 {
 	public static final int
-		TILE_WIDTH = 100,
-		TILE_HEIGHT = 50,
+		TILES_WIDE = 100,
+		TILES_HIGH = 50,
 		TILE_SIZE = 10,
-		WIDTH = TILE_WIDTH * TILE_SIZE,
-		HEIGHT = TILE_HEIGHT * TILE_SIZE;
+		WIDTH = TILES_WIDE * TILE_SIZE,
+		HEIGHT = TILES_HIGH * TILE_SIZE;
+	public static final Font FONT = new Font(Font.MONOSPACED, Font.PLAIN, TILE_SIZE);
+	public static final int
+		TILE_WIDTH = MapTile.CHARS_WIDE*new Canvas().getFontMetrics(FONT).charWidth('a'),
+		TILE_HEIGHT = MapTile.CHARS_HIGH*new Canvas().getFontMetrics(FONT).getHeight();
 	public Map map;
 	public MapDisplay()
 	{
@@ -34,15 +39,19 @@ public class MapDisplay extends JPanel implements KeyListener
 	{
 		page.setColor(Color.BLACK);
 		page.fillRect(0, 0, MapDisplay.WIDTH, MapDisplay.HEIGHT);
+		page.setFont(FONT);
 		
-		Font font = new Font(Font.MONOSPACED, Font.PLAIN, TILE_SIZE);
-		page.setFont(font);
-		
-		for (MapTile[] tiles: map.TILES)
-			for (MapTile tile: tiles)
+		for (int x=0; x<map.TILES.length && x<WIDTH; x++)
+			for (int y=0; y<map.TILES[x].length && y<HEIGHT; y++)
 			{
-				System.out.println(tile);
+				paintTile(page, x, y);
 			}
+	}
+	private void paintTile(Graphics page, int x, int y)
+	{
+		MapTile tile = map.TILES[x][y];
+		page.setColor(tile.COLOR);
+		page.fillRect(x*TILE_WIDTH, y*TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
 	}
 	@Override
 	public void keyPressed(KeyEvent k)

@@ -14,7 +14,7 @@ enum BodyPart
 		REQ_TO_GRAB, //Whether the part is required to grab objects
 		SURVIVE; //Whether the creature can survive without the part
 	final int
-		DAMAGE;
+		DAMAGE; //Damage the part can survive before it's destroyed
 	BodyPart(String name, boolean reqWalk, boolean reqGrab, boolean survive, int damage)
 	{
 		NAME = name;
