@@ -26,8 +26,7 @@ public class Map
 		FILE_NAME = fileName;
 		playerX = 0;
 		playerY = 0;
-		MapTile[][] result = {{MapTile.CEMENT,MapTile.CEMENT},{MapTile.CEMENT}};
-		/*
+		MapTile[][] result;
 		try
 		{
 			ArrayList<ArrayList<MapTile>> arrayResult = new ArrayList<ArrayList<MapTile>>();
@@ -35,7 +34,6 @@ public class Map
 			Scanner reader = new Scanner(new FileReader(FILE_NAME+EXTENSION));
 			
 			reader.useDelimiter("\\s");
-			@SuppressWarnings("unused")
 			int
 				currX = 0,
 				currY = 0;
@@ -53,12 +51,12 @@ public class Map
 					arrayX.add(MapTile.valueOf(token));
 				}
 			}
+			arrayResult.add(currY++, arrayX);
 			reader.close();
-			//TODO arrayResult.get(0).size() put this in the slot with 0 once something has been added
 			result = new MapTile[arrayResult.size()][arrayResult.get(0).size()];
-			for (int y=0; y<arrayResult.size(); y++)
-				for (int x=0; x<arrayResult.get(y).size(); x++)
-					System.out.println(x+"\t"+y);
+			for (int x=0; x<arrayResult.size(); x++)
+				for (int y=0; y<arrayResult.get(x).size(); y++)
+					result[x][y] = arrayResult.get(x).get(y);
 		}
 		catch (IOException e)
 		{
@@ -66,7 +64,6 @@ public class Map
 			JOptionPane.showMessageDialog(null, FILE_NAME+EXTENSION+" could not be found");
 			result = new MapTile[0][0];
 		}
-		*/
 		TILES = result;
 	}
 	/**

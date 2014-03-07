@@ -50,6 +50,7 @@ public class MapDisplay extends JPanel implements KeyListener
 	private void paintTile(Graphics page, int x, int y)
 	{
 		MapTile tile = map.TILES[x][y];
+		if (tile == null) return;
 		page.setColor(tile.COLOR);
 		page.fillRect(x*TILE_WIDTH, y*TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
 	}
