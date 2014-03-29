@@ -47,16 +47,14 @@ public class Map
 					arrayX = new ArrayList<MapTile>();
 				}
 				else
-				{
 					arrayX.add(MapTile.valueOf(token));
-				}
 			}
 			arrayResult.add(currY++, arrayX);
 			reader.close();
-			result = new MapTile[arrayResult.size()][arrayResult.get(0).size()];
+			result = new MapTile[arrayResult.get(0).size()][arrayResult.size()];
 			for (int x=0; x<arrayResult.size(); x++)
 				for (int y=0; y<arrayResult.get(x).size(); y++)
-					result[x][y] = arrayResult.get(x).get(y);
+					result[y][x] = arrayResult.get(x).get(y);
 		}
 		catch (IOException e)
 		{

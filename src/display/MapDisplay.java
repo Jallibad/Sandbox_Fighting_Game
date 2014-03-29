@@ -16,16 +16,16 @@ import raid.MapTile;
 @SuppressWarnings("serial")
 public class MapDisplay extends JPanel implements KeyListener
 {
+	public static final Font FONT = new Font(Font.MONOSPACED, Font.PLAIN, 10 /*Change this to change font size*/);
 	public static final int
-		TILES_WIDE = 100,
-		TILES_HIGH = 50,
-		TILE_SIZE = 10,
-		WIDTH = TILES_WIDE * TILE_SIZE,
-		HEIGHT = TILES_HIGH * TILE_SIZE;
-	public static final Font FONT = new Font(Font.MONOSPACED, Font.PLAIN, TILE_SIZE);
-	public static final int
-		TILE_WIDTH = MapTile.CHARS_WIDE*new Canvas().getFontMetrics(FONT).charWidth('a'),
-		TILE_HEIGHT = MapTile.CHARS_HIGH*new Canvas().getFontMetrics(FONT).getHeight();
+		TILES_WIDE = 25,
+		TILES_HIGH = 15,
+		CHAR_WIDTH = new Canvas().getFontMetrics(FONT).charWidth('a'),
+		CHAR_HEIGHT = new Canvas().getFontMetrics(FONT).getAscent(),
+		TILE_WIDTH = MapTile.CHARS_WIDE*CHAR_WIDTH,
+		TILE_HEIGHT = MapTile.CHARS_HIGH*CHAR_HEIGHT,
+		WIDTH = TILES_WIDE*CHAR_WIDTH*MapTile.CHARS_WIDE,
+		HEIGHT = TILES_HIGH*CHAR_HEIGHT*MapTile.CHARS_HIGH;
 	public Map map;
 	public MapDisplay()
 	{
@@ -43,16 +43,18 @@ public class MapDisplay extends JPanel implements KeyListener
 		
 		for (int x=0; x<map.TILES.length && x<WIDTH; x++)
 			for (int y=0; y<map.TILES[x].length && y<HEIGHT; y++)
-			{
 				paintTile(page, x, y);
-			}
 	}
 	private void paintTile(Graphics page, int x, int y)
 	{
 		MapTile tile = map.TILES[x][y];
 		if (tile == null) return;
+		page.setColor(Color.WHITE);
+		page.drawRect(x*TILE_WIDTH, y*TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
 		page.setColor(tile.COLOR);
-		page.fillRect(x*TILE_WIDTH, y*TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+		for (int ix=x*TILE_WIDTH; ix<(x+1)*TILE_WIDTH; ix+=CHAR_WIDTH)
+			for (int iy=y*TILE_HEIGHT+CHAR_HEIGHT; iy<(y+1)*TILE_HEIGHT+CHAR_HEIGHT; iy+=CHAR_HEIGHT)
+				page.drawString(String.valueOf(tile.LINE), ix, iy);
 	}
 	@Override
 	public void keyPressed(KeyEvent k)

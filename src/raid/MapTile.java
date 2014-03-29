@@ -4,12 +4,12 @@ import java.awt.Color;
 
 public enum MapTile
 {
-//	TILE_NAME	('c',	Color.COLOR,		pass),
-	CEMENT		('+', 	Color.LIGHT_GRAY,	true),
-	EMPTY		(' ',	Color.BLACK,		false);
+//	TILE_NAME	('c',			Color.COLOR,			pass),
+	CEMENT		('+',		 	Color.LIGHT_GRAY,		true),
+	WALL		((char)9608,	Color.LIGHT_GRAY,		false),
+	EMPTY		(' ',			Color.BLACK,			false);
 	
-	@SuppressWarnings("unused")
-	private final char
+	public final char
 		LINE;
 	public static final int
 		CHARS_WIDE = 5, //Number of characters across in a tile
