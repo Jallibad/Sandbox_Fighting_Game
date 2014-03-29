@@ -41,20 +41,13 @@ public class MapDisplay extends JPanel implements KeyListener
 		page.fillRect(0, 0, MapDisplay.WIDTH, MapDisplay.HEIGHT);
 		page.setFont(FONT);
 		
-		for (int x=0; x<map.TILES.length && x<WIDTH; x++)
-			for (int y=0; y<map.TILES[x].length && y<HEIGHT; y++)
-				paintTile(page, x, y);
-	}
-	private void paintTile(Graphics page, int x, int y)
-	{
-		MapTile tile = map.TILES[x][y];
-		if (tile == null) return;
-		page.setColor(Color.WHITE);
-		page.drawRect(x*TILE_WIDTH, y*TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
-		page.setColor(tile.COLOR);
-		for (int ix=x*TILE_WIDTH; ix<(x+1)*TILE_WIDTH; ix+=CHAR_WIDTH)
-			for (int iy=y*TILE_HEIGHT+CHAR_HEIGHT; iy<(y+1)*TILE_HEIGHT+CHAR_HEIGHT; iy+=CHAR_HEIGHT)
-				page.drawString(String.valueOf(tile.LINE), ix, iy);
+		char[][] representation = map.represent(TILES_WIDE, TILES_HIGH);
+		for (int x=0; x<representation.length; x++)
+			for (int y=0; y<representation[y].length; y++)
+			{
+				page.setColor(Color.WHITE);
+				page.drawString(String.valueOf(representation[x][y]), x*CHAR_WIDTH, (y+1)*CHAR_HEIGHT);
+			}
 	}
 	@Override
 	public void keyPressed(KeyEvent k)

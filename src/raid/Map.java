@@ -40,7 +40,6 @@ public class Map
 			while (reader.hasNext())
 			{
 				String token = reader.next();
-				//TODO Read map from file and store
 				if (token.equals(""))
 				{
 					arrayResult.add(currY++, arrayX);
@@ -79,6 +78,7 @@ public class Map
 			playerX = propX;
 			playerY = propY;
 		}
+		System.out.println(playerX+"\t"+playerY);
 	}
 	/**
 	 * Re-centers the camera on the player
@@ -95,14 +95,38 @@ public class Map
 	 */
 	private boolean passable(int x, int y)
 	{
-		//TODO fix the fuck out of this
 		try
 		{
 			return TILES[x][y].PASSABLE;
 		}
-		catch (ArrayIndexOutOfBoundsException e)
+		catch (ArrayIndexOutOfBoundsException | NullPointerException e)
 		{
 			return false;
 		}
+	}
+	/**
+	 * Gives a char[][] with every char that should be displayed
+	 * @param width - the width of the screen 
+	 * @param height - the height of the screen
+	 * @return A char[][] that contains a full screen of char's
+	 */
+	public char[][] represent(int width, int height)
+	{
+		//TODO fix this shit
+		char[][] result = new char[width*MapTile.CHARS_WIDE][height*MapTile.CHARS_HIGH];
+		for (int tileX=0; tileX<width; tileX++)
+			for (int tileY=0; tileY<height; tileY++)
+				try
+				{
+					for (int x=0; x<MapTile.CHARS_WIDE; x++)
+						for (int y=0; y<MapTile.CHARS_HIGH; y++)
+							result[tileX*MapTile.CHARS_WIDE+x][tileY*MapTile.CHARS_HIGH+y] = TILES[tileX][tileY].LINE;
+				}
+				catch (ArrayIndexOutOfBoundsException | NullPointerException e)
+				{
+					//Shit happens, it's fine
+				}
+		System.out.println(playerX+"\t"+playerY);
+		return result;
 	}
 }
