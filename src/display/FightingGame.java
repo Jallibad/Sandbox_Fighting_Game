@@ -10,7 +10,7 @@ import javax.swing.UIManager;
 @SuppressWarnings("serial")
 public class FightingGame extends JFrame
 {
-	private static JFrame frame = new JFrame("FrameDemo");
+	private static JFrame frame = new JFrame("Sandbox Fighting Game");
 	private static FightDisplay fightDisplay;
 	private static MapDisplay mapDisplay;
 	public static Container pane;

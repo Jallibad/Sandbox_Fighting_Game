@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
-@SuppressWarnings("unused")
 public class Map
 {
 	private static final String
@@ -16,9 +15,7 @@ public class Map
 		FILE_NAME;
 	private int
 		playerX,
-		playerY,
-		cameraX,
-		cameraY;
+		playerY;
 	public final MapTile[][] TILES;
 	
 	public Map(String fileName)
@@ -34,9 +31,7 @@ public class Map
 			Scanner reader = new Scanner(new FileReader(FILE_NAME+EXTENSION));
 			
 			reader.useDelimiter("\\s");
-			int
-				currX = 0,
-				currY = 0;
+			int currY = 0;
 			while (reader.hasNext())
 			{
 				String token = reader.next();

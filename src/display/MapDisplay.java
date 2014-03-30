@@ -16,7 +16,7 @@ import raid.MapTile;
 @SuppressWarnings("serial")
 public class MapDisplay extends JPanel implements KeyListener
 {
-	public static final Font FONT = new Font(Font.MONOSPACED, Font.PLAIN, 10 /*Change this to change font size*/);
+	public static final Font FONT = new Font("Courier new", Font.PLAIN, 10 /*Change this to change font size*/);
 	public static final int
 		TILES_WIDE = 25,
 		TILES_HIGH = 15,
@@ -41,13 +41,15 @@ public class MapDisplay extends JPanel implements KeyListener
 		page.fillRect(0, 0, MapDisplay.WIDTH, MapDisplay.HEIGHT);
 		page.setFont(FONT);
 		
-		char[][] representation = map.represent(TILES_WIDE, TILES_HIGH);
-		for (int x=0; x<representation.length; x++)
-			for (int y=0; y<representation[y].length; y++)
+		for (int tileX=0; tileX<map.TILES.length; tileX++)
+			for (int tileY=0; tileY<map.TILES[tileX].length; tileY++)
 			{
-				page.setColor(Color.WHITE);
-				page.drawString(String.valueOf(representation[x][y]), x*CHAR_WIDTH, (y+1)*CHAR_HEIGHT);
+				page.setColor(map.TILES[tileX][tileY].COLOR);
+				for (int x=0; x<MapTile.CHARS_WIDE; x++)
+					for (int y=0; y<MapTile.CHARS_HIGH; y++)
+						page.drawString(String.valueOf(map.TILES[tileX][tileY].LINE), CHAR_WIDTH*(tileX*MapTile.CHARS_WIDE+x), CHAR_HEIGHT*(tileY*MapTile.CHARS_HIGH+y+1));
 			}
+		page.drawString("SQUAD", 0, 0);
 	}
 	@Override
 	public void keyPressed(KeyEvent k)
