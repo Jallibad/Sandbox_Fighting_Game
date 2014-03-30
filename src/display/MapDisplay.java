@@ -67,6 +67,7 @@ public class MapDisplay extends JPanel implements KeyListener
 				map.move(0, 1);
 				break;
 		}
+		repaint();
 	}
 	@Override
 	public void keyReleased(KeyEvent k)

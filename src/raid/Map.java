@@ -126,7 +126,11 @@ public class Map
 				{
 					//Shit happens, it's fine
 				}
-		System.out.println(playerX+"\t"+playerY);
+		System.out.println(result[MapTile.CHARS_WIDE*2][MapTile.CHARS_HIGH*2]);
+		result[playerX*MapTile.CHARS_WIDE][playerY*MapTile.CHARS_HIGH] = 'P';
+		result[playerX*MapTile.CHARS_WIDE+1][playerY*MapTile.CHARS_HIGH] = 'l';
+		result[playerX*MapTile.CHARS_WIDE+2][playerY*MapTile.CHARS_HIGH] = 'a';
+		result[playerX*MapTile.CHARS_WIDE+3][playerY*MapTile.CHARS_HIGH] = 'y';
 		return result;
 	}
 }
