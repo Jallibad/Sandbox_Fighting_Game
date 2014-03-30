@@ -49,7 +49,14 @@ public class MapDisplay extends JPanel implements KeyListener
 					for (int y=0; y<MapTile.CHARS_HIGH; y++)
 						page.drawString(String.valueOf(map.TILES[tileX][tileY].LINE), CHAR_WIDTH*(tileX*MapTile.CHARS_WIDE+x), CHAR_HEIGHT*(tileY*MapTile.CHARS_HIGH+y+1));
 			}
-		page.drawString("SQUAD", 0, 0);
+		//TODO fix this shit
+		int
+			textX = map.playerX*MapTile.CHARS_WIDE*CHAR_WIDTH,
+			textY = ((map.playerY+1)*MapTile.CHARS_HIGH-MapTile.SQUAD_TEXT_DROP)*CHAR_HEIGHT;
+		page.setColor(Color.BLACK);
+		page.fillRect(textX, textY-MapTile.SQUAD_TEXT_DROP*CHAR_HEIGHT, MapTile.CHARS_WIDE*CHAR_WIDTH, CHAR_HEIGHT);
+		page.setColor(Color.YELLOW);
+		page.drawString("SQUAD", textX, textY);
 	}
 	@Override
 	public void keyPressed(KeyEvent k)

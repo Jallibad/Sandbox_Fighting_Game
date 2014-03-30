@@ -13,11 +13,15 @@ public class Map
 		EXTENSION = ".map"; //The file extension of a map ex:"example.txt"
 	private final String
 		FILE_NAME;
-	private int
+	public int
 		playerX,
 		playerY;
 	public final MapTile[][] TILES;
 	
+	/**
+	 * Creates a map from the given fileName
+	 * @param fileName - The name of the map (no extension necessary)
+	 */
 	public Map(String fileName)
 	{
 		FILE_NAME = fileName;
@@ -73,7 +77,7 @@ public class Map
 			playerX = propX;
 			playerY = propY;
 		}
-		System.out.println(playerX+"\t"+playerY);
+			System.out.println(playerX+"\t"+playerY);
 	}
 	/**
 	 * Re-centers the camera on the player
@@ -98,34 +102,5 @@ public class Map
 		{
 			return false;
 		}
-	}
-	/**
-	 * Gives a char[][] with every char that should be displayed
-	 * @param width - the width of the screen 
-	 * @param height - the height of the screen
-	 * @return A char[][] that contains a full screen of char's
-	 */
-	public char[][] represent(int width, int height)
-	{
-		//TODO fix this shit
-		char[][] result = new char[width*MapTile.CHARS_WIDE][height*MapTile.CHARS_HIGH];
-		for (int tileX=0; tileX<width; tileX++)
-			for (int tileY=0; tileY<height; tileY++)
-				try
-				{
-					for (int x=0; x<MapTile.CHARS_WIDE; x++)
-						for (int y=0; y<MapTile.CHARS_HIGH; y++)
-							result[tileX*MapTile.CHARS_WIDE+x][tileY*MapTile.CHARS_HIGH+y] = TILES[tileX][tileY].LINE;
-				}
-				catch (ArrayIndexOutOfBoundsException | NullPointerException e)
-				{
-					//Shit happens, it's fine
-				}
-		System.out.println(result[MapTile.CHARS_WIDE*2][MapTile.CHARS_HIGH*2]);
-		result[playerX*MapTile.CHARS_WIDE][playerY*MapTile.CHARS_HIGH] = 'P';
-		result[playerX*MapTile.CHARS_WIDE+1][playerY*MapTile.CHARS_HIGH] = 'l';
-		result[playerX*MapTile.CHARS_WIDE+2][playerY*MapTile.CHARS_HIGH] = 'a';
-		result[playerX*MapTile.CHARS_WIDE+3][playerY*MapTile.CHARS_HIGH] = 'y';
-		return result;
 	}
 }

@@ -14,7 +14,8 @@ public enum MapTile
 		LINE;
 	public static final int
 		CHARS_WIDE = 5, //Number of characters across in a tile
-		CHARS_HIGH = 3; //Number of characters high in a tile
+		CHARS_HIGH = 3, //Number of characters high in a tile
+		SQUAD_TEXT_DROP = 1; //Where the "SQUAD" text should be placed
 	public final Color
 		COLOR;
 	public final boolean
