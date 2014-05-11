@@ -44,10 +44,10 @@ public class MapDisplay extends JPanel implements KeyListener
 		for (int tileX=0; tileX<map.TILES.length; tileX++)
 			for (int tileY=0; tileY<map.TILES[tileX].length; tileY++)
 			{
-				page.setColor(map.TILES[tileX][tileY].COLOR);
+				page.setColor(map.TILES[tileX][tileY].TILE.COLOR);
 				for (int x=0; x<MapTile.CHARS_WIDE; x++)
 					for (int y=0; y<MapTile.CHARS_HIGH; y++)
-						page.drawString(String.valueOf(map.TILES[tileX][tileY].LINE), CHAR_WIDTH*(tileX*MapTile.CHARS_WIDE+x), CHAR_HEIGHT*(tileY*MapTile.CHARS_HIGH+y+1));
+						page.drawString(String.valueOf(map.TILES[tileX][tileY].TILE.PIECE), CHAR_WIDTH*(tileX*MapTile.CHARS_WIDE+x), CHAR_HEIGHT*(tileY*MapTile.CHARS_HIGH+y+1));
 			}
 		//TODO fix this shit
 		int
