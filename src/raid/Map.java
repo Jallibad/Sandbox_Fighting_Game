@@ -17,6 +17,7 @@ public class Map
 	public int
 		playerX,
 		playerY;
+	public boolean readyToClose = false;
 	public final Tile[][] TILES;
 	
 	/**
@@ -34,7 +35,7 @@ public class Map
 			ArrayList<ArrayList<Tile>> arrayResult = new ArrayList<ArrayList<Tile>>();
 			ArrayList<Tile> arrayX = new ArrayList<Tile>();
 			
-			reader.useDelimiter("[\\t\\n\\r]");
+			reader.useDelimiter("[\\t\\n\\r]"); //Reads until it encounters a tab or carriage return
 			int currY = 0;
 			while (reader.hasNext())
 			{
@@ -57,13 +58,19 @@ public class Map
 						String packageName = Entity.class.getPackage().getName();
 						Object temp = Class.forName(packageName+"."+split[1]).getConstructor().newInstance();
 						if (!(temp instanceof Entity))
-							throw new ClassNotFoundException();
+							throw new ClassNotFoundException(temp+" is a class, but not a subclass of Entity");
 						entity = (Entity) temp;
 					}
 					catch (ClassNotFoundException | InvocationTargetException | IllegalAccessException | InstantiationException | NoSuchMethodException e)
 					{
-						System.out.println("Entity wrong: "+split[1]); //TODO better error message here
-						System.out.println(e.getClass());
+						String errorMessage =
+								"Entity wrong: "+split[1]+
+								"\n"+
+								e.getClass()+
+								"\nIgnoring this entity";
+						
+						System.out.println(errorMessage);
+						JOptionPane.showMessageDialog(null, errorMessage);
 					}
 					token = split[0];
 				}
@@ -95,44 +102,46 @@ public class Map
 			System.out.println(errorMessage);
 			JOptionPane.showMessageDialog(null, errorMessage);
 			tileResult = new Tile[0][0];
-			System.exit(1); //TODO exit the map without exiting the program
+			System.exit(1); //TODO Exit the map without exiting the program
 		}
 		TILES = tileResult;
 	}
 	/**
-	 * Moves the player the requested x/y delta and allows interactions with Entity's
+	 * Tries to move the player the requested x/y delta and allows interactions with Entity's
 	 * @param xDelta - the x delta to move the player by
 	 * @param yDelta - the y delta to move the player by
 	 */
-	public void move(int xDelta, int yDelta)
+	public void tryMove(int xDelta, int yDelta)
 	{
 		int
 			propX = playerX+xDelta,
 			propY = playerY+yDelta;
-		Tile tile = getTile(propX, propY);
 		
-		if (tile.canInteract())
-		{
-			JOptionPane.showConfirmDialog(null, "do you want to interact with this entity?", "Interaction", JOptionPane.YES_NO_OPTION);
-					
+		if (!isACoordinate(propX, propY))
+			return;
+		
+		Tile tile = TILES[propX][propY];
+		
+		if (tile.canInteract() && !tile.ENTITY.passable)
 			tile.ENTITY.interact();
-		}
-		if (tile.isPassable())
+		else if (tile.isPassable())
 		{
 			playerX = propX;
 			playerY = propY;
 		}
 	}
-
-	private Tile getTile(int x, int y)
+	/**
+	 * Checks whether the given coordinate contains a valid MapTile
+	 * @param x - the x coordinate
+	 * @param y - the y coordinate
+	 * @return true if valid, false otherwise.
+	 */
+	private boolean isACoordinate(int x, int y)
 	{
-		try
-		{
-			return TILES[x][y];
-		}
-		catch (ArrayIndexOutOfBoundsException e)
-		{
-			return null;
-		}
+		return
+			x >= 0 &&
+			y >= 0 &&
+			x <= TILES.length-1 &&
+			y <= TILES[x].length-1;
 	}
 }
