@@ -1,7 +1,7 @@
 package raid;
 
 /**
- * An abstract representing any map feature that is not a MapTile.  Can be extended to represent more things.
+ * An abstract representing any map feature that is not a MapTile.  Should be extended to represent more things.
  * @author Jallibad
  *
  */
@@ -12,14 +12,16 @@ public abstract class Entity
 		canInteract = true,
 		chooseableInteraction = true;
 	/**
-	 * Gives a char[][] that graphically represents the given Entity.
-	 * @return a char[][] with '\\' denoting an empty graphic
+	 * Gives a String[] that graphically represents the given Entity.
+	 * @return a String[] with '\\' denoting an empty cell
 	 */
 	protected abstract String[] privateDraw();
+	
 	/**
-	 * Causes the Entity to do it function (if it has one).
+	 * Causes the Entity to do its function (if it has one).
 	 */
 	public abstract void interact();
+	
 	/**
 	 * a description of the Entity.
 	 * @return
@@ -30,12 +32,12 @@ public abstract class Entity
 	{
 		
 	}
+	
 	public String[] draw()
 	{
 		String[] result = privateDraw();
 		String[] empty = new String[MapTile.CHARS_HIGH];
 		
-		//TODO Change exception type
 		if (result.length != MapTile.CHARS_HIGH)
 			return empty;
 		else
@@ -44,6 +46,7 @@ public abstract class Entity
 					return empty;
 		return result;
 	}
+	
 	@Override
 	public String toString()
 	{

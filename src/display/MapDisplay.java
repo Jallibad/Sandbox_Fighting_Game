@@ -56,6 +56,13 @@ public class MapDisplay extends JPanel implements KeyListener
 		page.setColor(Color.YELLOW);
 		page.drawString(playerText, textX, textY);
 	}
+	
+	/**
+	 * Draws a single MapTile and any Entity's that are on it.
+	 * @param page
+	 * @param tileX
+	 * @param tileY
+	 */
 	private void drawTile(Graphics page, int tileX, int tileY)
 	{
 		Tile tile = map.TILES[tileX][tileY];
@@ -64,7 +71,7 @@ public class MapDisplay extends JPanel implements KeyListener
 			for (int y=0; y<MapTile.CHARS_HIGH; y++)
 			{
 				char cell = tile.TILE.PIECE;
-				if (tile.ENTITY != null)
+				if (tile.ENTITY != null && tile.ENTITY.draw()[y] != null)
 				{
 					String entityLine = tile.ENTITY.draw()[y];
 					

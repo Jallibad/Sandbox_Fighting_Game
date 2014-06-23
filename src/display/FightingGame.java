@@ -40,12 +40,13 @@ public class FightingGame extends JFrame
 		}
 		catch (Exception e)
 		{
+			String message = "Shit's going down now (the setLookAndFeel method just shat itself)";
 			JOptionPane.showMessageDialog
 			(
 				null,
-				"Shit's going down now (the setLookAndFeel method just shat itself)"
+				message
 			);
-			System.out.println("Shit's going down now");
+			System.out.println(message);
 			System.exit(1);
 		}
 		frame.setResizable(false);
