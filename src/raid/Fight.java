@@ -35,8 +35,6 @@ public class Fight
 	}
 	private void attack(Character attacker, Character defender)
 	{
-		if (defender == null)
-			return;
 		combatLog.add
 		(
 			attacker.name.withAbbrev() + " "+Word.ATTACK_VERB.getWord()+" " + attacker.weapon

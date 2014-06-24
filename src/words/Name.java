@@ -3,12 +3,17 @@ package words;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 
 public class Name
 {
+	private static final String[] DEFAULT_NAME = new String[]{"PhuckYou"};
 	public final String[] NAME;
-	private static final int
-		LINES_IN_FILE = count("MaleFirstNames.txt");
+	
+	/**
+	 * Makes a new Name from a String
+	 * @param name
+	 */
 	public Name(String name)
 	{
 		NAME = name.split(" ");
@@ -18,24 +23,31 @@ public class Name
 		String name = "";
 		try
 		{
+			RandomAccessFile reader = new RandomAccessFile("MaleFirstNames.txt", "r");
 			for (int i=0; i<parts; i++)
 			{
-				BufferedReader reader = new BufferedReader(new FileReader("MaleFirstNames.txt"));
-				int line = (int)(Math.random()*LINES_IN_FILE);
+				//TODO Use other names (not just male ones)
+				int line = (int)(Math.random()*count("MaleFirstNames.txt"));
 				for (int n=0; n<line; n++)
 					reader.readLine();
 				name += reader.readLine()+" ";
-				reader.close();
+				reader.seek(0);
 			}
+			reader.close();
 		}
 		catch (IOException e)
 		{
-			NAME = new String[]{"PhuckYou"};
+			NAME = DEFAULT_NAME;
 			return;
 		}
 		NAME = name.split(" ");
 	}
-	public String withAbbrev() //Gives the name abbreviating any middle names
+	
+	/**
+	 * Gives the name abbreviating any middle names
+	 * @return
+	 */
+	public String withAbbrev()
 	{
 		String result = NAME[0];
 		if (NAME.length != 1)
@@ -47,7 +59,12 @@ public class Name
 		}
 		return result;
 	}
-	public String shortened() //Gives the name without any vowels
+	
+	/**
+	 * Shortens the name by removing the lowercase vowels
+	 * @return A String with the lowercase vowels removed
+	 */
+	public String shortened()
 	{
 		String result = toString();
 		for (String vowel: new String[] {"a", "e", "i", "o", "u"})
@@ -55,7 +72,10 @@ public class Name
 		return result;
 	}
 	
-	public String toString() // Gives the full name
+	/**
+	 * The full Name
+	 */
+	public String toString()
 	{
 		String result = "";
 		for (String name : NAME)
@@ -75,7 +95,7 @@ public class Name
 		catch (IOException e)
 		{
 			System.out.println(e.getMessage());
-			System.out.println("error reading file, defaulting to \"PhuckYou\"");
+			System.out.println("error reading file, defaulting to \""+DEFAULT_NAME+"\"");
 		}
 		return lines;
 	}

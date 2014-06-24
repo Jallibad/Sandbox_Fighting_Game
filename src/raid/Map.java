@@ -106,6 +106,7 @@ public class Map
 		}
 		TILES = tileResult;
 	}
+	
 	/**
 	 * Tries to move the player the requested x/y delta and allows interactions with Entity's
 	 * @param xDelta - the x delta to move the player by
@@ -130,6 +131,7 @@ public class Map
 			playerY = propY;
 		}
 	}
+	
 	/**
 	 * Checks whether the given coordinate contains a valid MapTile
 	 * @param x - the x coordinate
