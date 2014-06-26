@@ -3,7 +3,7 @@ package raid;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-import words.Word;
+import words.Verb;
 import character.Age;
 import character.Character;
 import character.Creature;
@@ -37,9 +37,9 @@ public class Fight
 	{
 		combatLog.add
 		(
-			attacker.name.withAbbrev() + " "+Word.ATTACK_VERB.getWord()+" " + attacker.weapon
+			attacker.name.withAbbrev() + " "+Verb.ATTACK.getWord()+" " + attacker.weapon
 			+ " at " + defender.name.withAbbrev() + "\n"
-			+ attacker.name.withAbbrev() + " "+Word.HIT_VERB.getWord()+" "+ defender.name.withAbbrev() + "'s "
+			+ attacker.name.withAbbrev() + " "+Verb.HIT.getWord()+" "+ defender.name.withAbbrev() + "'s "
 			+ defender.damage(attacker.calcDamage())
 		);
 	}

@@ -7,9 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
-@SuppressWarnings("serial")
 public class FightingGame extends JFrame
 {
+	private static final long serialVersionUID = 8414556091201531482L;
 	private static JFrame frame = new JFrame("Sandbox Fighting Game");
 	private static FightDisplay fightDisplay;
 	private static MapDisplay mapDisplay;
@@ -56,8 +56,8 @@ public class FightingGame extends JFrame
 		
 		frame.pack();
 		frame.setVisible(true);
-		displayRaid();
-//		displayFight();
+//		displayRaid();
+		displayFight();
 	}
 	public static void removeFight()
 	{

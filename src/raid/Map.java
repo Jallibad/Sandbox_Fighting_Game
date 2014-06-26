@@ -24,7 +24,7 @@ public class Map
 	 * Creates a map from the given fileName
 	 * @param fileName - The name of the map (no extension necessary)
 	 */
-	public Map(String fileName)
+	public Map(String fileName) //TODO Split this method up
 	{
 		FILE_NAME = fileName;
 		playerX = 0;
@@ -68,7 +68,6 @@ public class Map
 								"\n"+
 								e.getClass()+
 								"\nIgnoring this entity";
-						
 						System.out.println(errorMessage);
 						JOptionPane.showMessageDialog(null, errorMessage);
 					}

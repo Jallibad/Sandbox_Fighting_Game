@@ -1,46 +1,33 @@
 package words;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.RandomAccessFile;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Name
+
+public class Name implements Word
 {
-	private static final String[] DEFAULT_NAME = new String[]{"PhuckYou"};
 	public final String[] NAME;
 	
 	/**
-	 * Makes a new Name from a String
+	 * Makes a new Name from a String.
 	 * @param name
 	 */
 	public Name(String name)
 	{
 		NAME = name.split(" ");
 	}
+	/**
+	 * Makes a new Name with the given number of parts.
+	 * @param parts - Number of parts to the Name
+	 */
 	public Name(int parts)
 	{
-		String name = "";
-		try
+		List<String> name = new ArrayList<String>();
+		for (int i=0; i<parts; i++)
 		{
-			RandomAccessFile reader = new RandomAccessFile("MaleFirstNames.txt", "r");
-			for (int i=0; i<parts; i++)
-			{
-				//TODO Use other names (not just male ones)
-				int line = (int)(Math.random()*count("MaleFirstNames.txt"));
-				for (int n=0; n<line; n++)
-					reader.readLine();
-				name += reader.readLine()+" ";
-				reader.seek(0);
-			}
-			reader.close();
+			name.add(getRandomWord("MaleFirstNames"));
 		}
-		catch (IOException e)
-		{
-			NAME = DEFAULT_NAME;
-			return;
-		}
-		NAME = name.split(" ");
+		NAME = name.toArray(new String[name.size()]);
 	}
 	
 	/**
@@ -81,22 +68,5 @@ public class Name
 		for (String name : NAME)
 			result += " " + name;
 		return result.substring(1);
-	}
-	
-	private static int count(String filename)
-	{
-		int lines = 0;
-		try
-		{
-			BufferedReader reader = new BufferedReader(new FileReader(filename));
-			while (reader.readLine() != null) lines++;
-			reader.close();
-		}
-		catch (IOException e)
-		{
-			System.out.println(e.getMessage());
-			System.out.println("error reading file, defaulting to \""+DEFAULT_NAME+"\"");
-		}
-		return lines;
 	}
 }
